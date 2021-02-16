@@ -20,9 +20,9 @@ Vector::Vector(const int &Quantity_, int *&Values_)
 }
 
 Vector::Vector(const Vector &vector)
-        : Quantity(vector.Quantity), DynamicQuantity(vector.Quantity) {
+        : Quantity(vector.Quantity), DynamicQuantity(vector.DynamicQuantity) {
     Values = new int[DynamicQuantity];
-    for (int i = 0; i < DynamicQuantity; i++) {
+    for (int i = 0; i < Quantity; i++) {
         Values[i] = vector.Values[i];
     }
 }
@@ -43,8 +43,9 @@ void Vector::change(const int &OldValue, const int &NewValue) {
 
 void Vector::push(const int &NewElementValue) {
     if (Quantity<DynamicQuantity){
-        Quantity++;
         Values[Quantity]=NewElementValue;
+        Quantity++;
+
     }
     else {
         int* NewValues= new int [DynamicQuantity+10];
@@ -55,19 +56,16 @@ void Vector::push(const int &NewElementValue) {
         delete[] Values;
         DynamicQuantity+=10;
         Quantity++;
-        for (int i=0; i<Quantity;i++){
-            Values[i]=NewValues[i];
-        }
+        Values=NewValues;
     }
 }
 
 int Vector::find(const int &ElementValue) {
-    bool IsFinded= false;
     int Number=-1;
     for (int i=0;i<Quantity;i++){
-        if ((Values[i]==ElementValue)&&(!IsFinded)){
-            IsFinded= true;
+        if (Values[i]==ElementValue){
             Number=i;
+            break;
         }
     }
     return Number;
@@ -76,11 +74,12 @@ int Vector::find(const int &ElementValue) {
 Vector &Vector::operator=(const Vector &vector){
     delete[] Values;
     Quantity=vector.Quantity;
-    DynamicQuantity=vector.Quantity;
-    Values = new int[DynamicQuantity];
-    for (int i = 0; i < DynamicQuantity; i++) {
+    DynamicQuantity=vector.DynamicQuantity;
+    Values = new int[Quantity];
+    for (int i = 0; i < Quantity; i++) {
         Values[i] = vector.Values[i];
     }
+    return *this;
 }
 
 int Vector::operator[]( int& Number) {
