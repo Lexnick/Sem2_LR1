@@ -40,6 +40,7 @@ void Vector::change(const int &OldValue, const int &NewValue) {
         if (Values[i] == OldValue){
             Values[i] = NewValue;
             break;
+        }
 }
 
 void Vector::push(const int &NewElementValue) {
