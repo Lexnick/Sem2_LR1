@@ -37,8 +37,9 @@ int Vector::size() {
 
 void Vector::change(const int &OldValue, const int &NewValue) {
     for (int i = 0; i < Quantity; i++)
-        if (Values[i] == OldValue)
+        if (Values[i] == OldValue){
             Values[i] = NewValue;
+            break;
 }
 
 void Vector::push(const int &NewElementValue) {
