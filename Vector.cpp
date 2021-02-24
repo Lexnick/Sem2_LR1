@@ -77,7 +77,7 @@ Vector &Vector::operator=(const Vector &vector){
     delete[] Values;
     Quantity=vector.Quantity;
     DynamicQuantity=vector.DynamicQuantity;
-    Values = new int[Quantity];
+    Values = new int[DynamicQuantity];
     for (int i = 0; i < Quantity; i++) {
         Values[i] = vector.Values[i];
     }
